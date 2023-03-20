@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Usersdata from './Usersdata'
+import { useNavigate } from 'react-router-dom'
 
  // getData from Localstorage
 
@@ -12,22 +13,25 @@ import Usersdata from './Usersdata'
         return []
     }
 }
-
+   
 const Myform = () => {
     const [data,setData] = useState(getdataSL())
     const [firstName,setfirstName] = useState("")
     const [lastName,setlastName] = useState("")
     const [email,setEmail] = useState("")
 
+
     const handleSubmitdata = (e) => {
         e.preventDefault()
         // creating object and store in localstorage
-        const userdata = ({
+        const userdata = {
             firstName,
             lastName,
             email
-        })  
+        }  
+        console.log(userdata);
         setData([...data,userdata])
+        console.log(data);
         setfirstName('')
         setlastName('')
         setEmail('')
@@ -53,13 +57,13 @@ const Myform = () => {
       <div className='form-container'>
         <form autoComplete='off' className='form-grop' onSubmit={handleSubmitdata}>
             <label>FirstName{firstName}</label>
-            <input type='text' placeholder='Enter First Name' className='form-control' onChange={(e) => setfirstName(e.target.value)}  required/>
+            <input type='text' placeholder='Enter First Name' className='form-control'  onChange={(e) => setfirstName(e.target.value)}  required/>
             <br></br>
             <label>LastName{lastName}</label>
-            <input type='text' placeholder='Enter Last Name' className='form-control' onChange={(e) => setlastName(e.target.value)} required/>
+            <input type='text' placeholder='Enter Last Name' className='form-control'  onChange={(e) => setlastName(e.target.value)} required/>
             <br></br>
             <label>Email{email}</label>
-            <input type='email' placeholder='Enter Email' className='form-control' onChange={(e) => setEmail(e.target.value)} required/>
+            <input type='email' placeholder='Enter Email' className='form-control'  onChange={(e) => setEmail(e.target.value)} required/>
             <br></br>
             <button type='submit' className='btn btn-success'>Submit</button>
         </form>
